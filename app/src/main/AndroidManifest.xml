@@ -8,9 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GeekBrains_Course_AcquaintanceWithAndroid_HW_noteOrganizer_Std">
-        <activity
-            android:name=".MainActivity"
+        android:theme="@style/Theme.NoteOrganizer">
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.NoteOrganizer.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
