@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.R;
-import ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.ui.Pluggable;
+import ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.domain.Pluggable;
 
 public class SettingsFragment extends Fragment {
 
@@ -47,11 +47,11 @@ public class SettingsFragment extends Fragment {
             // позиционирование происходит по идентификатору (наименование игнорируется и может быть
             // любым и на любом языке)
             // новые пункты именю или идентификаторы обработчики к ктороым не реализованы игнорируются.
-            case R.id.action_new_exit:
-                Pluggable.ToastPlug(requireContext(), "Закрыть приложение");
+            case R.id.action_exit:
+                Pluggable.toastPlug(requireContext(), "Закрыть приложение");
                 break;
             case R.id.action_help:
-                Pluggable.ToastPlug(requireContext(), "Инструкция для настроек");
+                Pluggable.toastPlug(requireContext(), "Инструкция для настроек");
                 break;
         }
         return super.onOptionsItemSelected(item);

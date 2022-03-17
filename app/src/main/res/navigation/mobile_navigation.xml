@@ -11,16 +11,19 @@
         android:label="@string/title_notes"
         tools:layout="@layout/fragment_notes" >
         <action
-            android:id="@+id/action_navigation_notes_to_editNoteFragment"
-            app:destination="@id/editNoteFragment"
-            app:popUpTo="@id/editNoteFragment" />
+            android:id="@+id/action_navigation_notes_to_newEditNoteFragment"
+            app:destination="@id/EditNoteFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_tasks"
         android:name="ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.ui.tasks.TasksFragment"
         android:label="@string/title_tasks"
-        tools:layout="@layout/fragment_tasks" />
+        tools:layout="@layout/fragment_tasks" >
+        <action
+            android:id="@+id/action_navigation_tasks_to_editTaskFragment"
+            app:destination="@id/editTaskFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
@@ -28,11 +31,27 @@
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
-        android:id="@+id/editNoteFragment"
-        android:label="EditNoteFragment">
+        android:id="@+id/EditNoteFragment"
+        android:name="ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.ui.notes.edit.EditNoteFragment"
+        android:label="Редактирование заметки"
+        tools:layout="@layout/fragment_edit_note" >
         <action
-            android:id="@+id/action_editNoteFragment_to_navigation_notes"
-            app:destination="@id/navigation_notes"
-            app:launchSingleTop="true" />
+            android:id="@+id/action_EditNoteFragment_to_navigation_notes"
+            app:destination="@id/navigation_notes" />
+        <argument
+            android:name="note"
+            app:argType="ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.domain.Note" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTaskFragment"
+        android:name="ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.ui.tasks.edit.EditTaskFragment"
+        android:label="Редактирование задачи"
+        tools:layout="@layout/fragment_edit_task" >
+        <action
+            android:id="@+id/action_editTaskFragment_to_navigation_tasks"
+            app:destination="@id/navigation_tasks" />
+        <argument
+            android:name="task"
+            app:argType="ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.domain.Task" />
     </fragment>
 </navigation>

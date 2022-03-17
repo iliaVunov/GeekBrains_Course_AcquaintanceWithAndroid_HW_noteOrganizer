@@ -1,23 +1,23 @@
-package ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.ui.notes.edit;
+package ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.ui.tasks.edit;
 
 import android.text.Editable;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.domain.CallBack;
-import ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.domain.Note;
-import ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.domain.NotesRepository;
+import ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.domain.Task;
+import ru.geekbrains.acquaintancewithandroid.hw.noteorganizer.domain.TasksRepository;
 
-public class EditNoteViewModel extends ViewModel {
-    private final NotesRepository repository;
+public class EditTaskViewModel extends ViewModel {
+    private final TasksRepository repository;
     private final MutableLiveData<Boolean> progressLiveData = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> saveEnabledLiveData = new MutableLiveData<>(false);
     private final MutableLiveData<Object> saveSucceedLiveData = new MutableLiveData<>();
 
-    // конструктор принимает репозиторий (при замене репозитория менять в классе фабрики)
-    public EditNoteViewModel(NotesRepository repository) {
+    public EditTaskViewModel(TasksRepository repository) {
         this.repository = repository;
     }
 
@@ -37,16 +37,17 @@ public class EditNoteViewModel extends ViewModel {
     // 1 вариант - просто непустая строка
     // 2 вариант (в разработке) проверить, если данные не изменены кнопку не активировать.
     public void validateInput(String newTitle) {
-        saveEnabledLiveData.setValue(!newTitle.isEmpty()); // первая проверка, если заголовок заметки не пустой.
+        saveEnabledLiveData.setValue(!newTitle.isEmpty()); // первая проверка, если заголовок задачи не пустой
     }
 
     //Логика сохранения измененных данных
-    public void saveNote(Editable text, Editable content, Note note) {
-        note.setTitle(text.toString());   // передаем как есть из поля редактирования в элемент
-        note.setContent(content.toString()); // забираем данные контента из поля пока как есть
+    public void saveTask(Editable text, Editable content, Task task) {
+        Log.w("EditTaskViewModel", "Метод saveTask начал свою работу ");
+        task.setTitle(text.toString());   // передаем как есть из поля редактирования в элемент
+        task.setContent(content.toString()); // забираем данные контента из поля пока как есть
         //СТАРТ показа прогресс-бара
         progressLiveData.setValue(true);
-        repository.updateNote(note, new CallBack<Object>() {
+        repository.updateTask(task, new CallBack<Object>() {
             @Override
             public void onResult(Object value) {
                 //СТОП показа прогресс-бара
@@ -54,5 +55,6 @@ public class EditNoteViewModel extends ViewModel {
                 saveSucceedLiveData.setValue(new Object());
             }
         });
+        Log.w("EditTaskViewModel", "Метод saveTask Закончил свою работу ");
     }
 }
